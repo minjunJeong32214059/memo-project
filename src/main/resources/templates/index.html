@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메모정</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Pretendard', sans-serif; }
+        .container { max-width: 800px; margin-top: 50px; }
+        .memo-card { border: none; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .memo-card:hover { transform: translateY(-5px); }
+        .form-section { background: white; border-radius: 15px; padding: 30px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    </style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+	    <div class="container">
+	        <a class="navbar-brand fw-bold text-primary" href="/">📝 메모정</a>
+	        <div class="d-flex align-items-center">
+	            <span class="me-3 text-secondary fw-bold">
+	                <i class="bi bi-person-circle"></i> 
+	                <span th:text="${#authentication.name}">사용자</span>님 환영합니다!
+	            </span>
+	            
+	            <form th:action="@{/logout}" method="post" class="m-0">
+	                <button type="submit" class="btn btn-sm btn-outline-danger fw-bold">로그아웃</button>
+	            </form>
+	        </div>
+	    </div>
+	</nav>
+
+<div class="container">
+    <h1 class="text-center mb-5 fw-bold text-primary">📝 메모정</h1>
+
+    <div class="form-section">
+        <h4 class="mb-4 fw-bold">새 메모 작성</h4>
+        <form action="/save" method="post">
+            <div class="mb-3">
+                <input type="text" name="title" class="form-control form-control-lg" placeholder="제목을 입력하세요" required>
+            </div>
+            <div class="mb-3">
+                <textarea name="content" class="form-control" rows="4" placeholder="당신의 생각을 기록해보세요"></textarea>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary btn-lg px-5">메모 저장하기</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="memo-list">
+        <h4 class="mb-4 fw-bold">저장된 메모 <span class="badge bg-primary" th:text="${memos.size()}">0</span></h4>
+        
+        <div th:if="${#lists.isEmpty(memos)}" class="text-center py-5 text-muted">
+            <p>아직 저장된 메모가 없습니다. 첫 메모를 남겨보세요</p>
+        </div>
+        
+        <div th:each="memo : ${memos}" class="card memo-card mb-3">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="card-title fw-bold text-dark" th:text="${memo.title}">제목</h5>
+                        <p class="card-text text-secondary mt-2" th:text="${memo.content}">내용</p>
+                        <small class="text-muted" th:text="${#temporals.format(memo.createdAt, 'yyyy-MM-dd HH:mm')}">날짜</small>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a th:href="@{'/edit/' + ${memo.id}}" class="btn btn-outline-primary btn-sm">수정</a>
+                        <a th:href="@{'/delete/' + ${memo.id}}" 
+                           onclick="return confirm('진심으로 삭제하시겠습니까?')" 
+                           class="btn btn-outline-danger btn-sm">삭제</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
