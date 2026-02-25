@@ -12,7 +12,7 @@
 <body>
     <div class="card login-card p-4">
         <div class="text-center mb-4">
-            <h2 class="fw-bold text-primary">📝 로그인</h2>
+            <h2 class="fw-bold text-primary">📝 메모정</h2>
             <p class="text-muted">마음껏 작성하고, 마음을 비우세요</p>
         </div>
 
@@ -30,7 +30,12 @@
                 <input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required>
             </div>
             <button type="submit" class="btn btn-primary w-100 fw-bold py-2 mt-2">로그인하기</button>
+			<div class="text-center mt-3">
+				    <span class="text-muted">계정이 없으신가요?</span>
+				    <a th:href="@{/user/signup}" class="text-primary fw-bold text-decoration-none">회원가입</a>
+			</div>
         </form>
     </div>
+	
 </body>
 </html>

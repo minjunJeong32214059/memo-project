@@ -1,0 +1,53 @@
+/* 기본 폰트 및 배경 설정 */
+body { 
+    background-color: #f4f7f6; 
+    font-family: 'Pretendard', sans-serif; 
+}
+
+.container { 
+    max-width: 800px; 
+    margin-top: 50px; 
+}
+
+/* 메모 카드 디자인 */
+.memo-card { 
+    border: none; 
+    border-radius: 15px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+    transition: transform 0.2s; 
+}
+
+.memo-card:hover { 
+    transform: translateY(-5px); 
+}
+
+/* 입력 섹션 디자인 */
+.form-section { 
+    background: white; 
+    border-radius: 15px; 
+    padding: 30px; 
+    margin-bottom: 40px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+}
+
+.input-group-text { 
+    background: white; 
+    border: none; 
+}
+
+/* 파일 선택 버튼 디자인 */
+.custom-file-input::file-selector-button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: 0.2s;
+}
+
+.custom-file-input::file-selector-button:hover {
+    background-color: #0b5ed7;
+}

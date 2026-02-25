@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
+import com.memo.memo_project.SiteUser;
 
 @Entity
 @Getter @Setter
@@ -20,7 +21,28 @@ public class Memo {
     private String content;
 
     private LocalDateTime createdAt;
+    
+    @ManyToOne
+    private SiteUser author;
+    
+    private String fileName; 
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public SiteUser getAuthor() {
+    return author;
+    }
+
+    public void setAuthor(SiteUser author) {
+    this.author = author;
+    }
+    
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
