@@ -35,3 +35,14 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# DB 데이터 폴더 제외
+mysql_data/
+
+# 빌드 결과물 제외
+build/
+.gradle/
+bin/
+
+# 설정 파일 내 민감 정보
+# application.properties

@@ -9,8 +9,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 브라우저가 /files/** 로 접근하면
-        // 실제 내 컴퓨터의 C:/memo_files/ 폴더를 보여주도록
+       	// 도커 내부의 /memo_files/ 폴더를 바라보도록
         registry.addResourceHandler("/files/**")
-                .addResourceLocations("file:///C:/memo_files/");
+                .addResourceLocations("file:/memo_files/");
     }
 }

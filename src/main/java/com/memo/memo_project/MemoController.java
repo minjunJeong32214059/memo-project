@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Value;
 
 
 @Controller
 public class MemoController {
+	
+	@Value("${file.upload-dir:/memo_files}")
+	private String uploadDir;
 	
 	@Autowired
 	private UserService userService;
@@ -60,7 +64,7 @@ public class MemoController {
         
         if (!file.isEmpty()) {
             // 저장 경로를 서버 내부가 아닌 외부 폴더(C:/memo_files/)로 설정
-            String projectPath = "C:/memo_files/"; 
+            String projectPath = uploadDir;
 
             // 폴더가 없는 경우를 대비해 자동으로 생성하는 로직을 추가하여 더욱 안전하게
             java.io.File dir = new java.io.File(projectPath);
